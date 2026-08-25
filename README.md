@@ -2,7 +2,7 @@
 
 This repo shows two ways to use the [Oracle Fusion Recruiting and Taleo Jobs API](https://apify.com/johnvc/oracle-taleo-jobs-api?fpr=9n7kx3) on Apify: a Python quick start managed with `uv`, and MCP install guides for five AI clients ([Claude Cowork Desktop](https://claude.ai/referral/uIlpa7nPLg), [Claude Code](https://claude.ai/referral/uIlpa7nPLg), Claude on the web, Cursor, and ChatGPT). Cowork and Claude Code both start with a free trial.
 
-Give the API a company name, like `Oracle` or `JPMorgan Chase`, or an Oracle careers URL, and it returns every live job posting as structured JSON: titles, every location, exact ISO posted dates, requisition IDs, category and organization, employer-published skills, latitude and longitude, extracted pay ranges, and direct apply URLs. It reads both Oracle recruiting products, current Oracle Fusion Recruiting (Cloud CX) boards and legacy Oracle Taleo boards. You do not need board credentials or a proxy.
+Give the API a company name, like `Oracle` or `Chase`, or an Oracle careers URL, and it returns every live job posting as structured JSON: titles, every location, exact ISO posted dates, requisition IDs, category and organization, employer-published skills, latitude and longitude, extracted pay ranges, and direct apply URLs. It reads both Oracle recruiting products, current Oracle Fusion Recruiting (Cloud CX) boards and legacy Oracle Taleo boards. You do not need board credentials or a proxy.
 
 Input schema: [full parameter reference](https://apify.com/johnvc/oracle-taleo-jobs-api/input-schema?fpr=9n7kx3)
 
@@ -62,15 +62,17 @@ Turn on `discoverOnly` and the API skips job collection entirely, returning one 
 
 ## Recipes
 
-Each recipe ships as a `--example` in `oracle-taleo-jobs-api-example.py`, and each one is a JSON input you can paste straight into the Actor on Apify.
+Each recipe ships as a `--example` in `oracle-taleo-jobs-api-example.py`, and each one has a published task page on Apify. Run the command locally, or open the task page and run it in the browser.
 
-| Recipe | What it answers | Command |
-|---|---|---|
-| Jobs from one board | Every open role on a single Oracle Fusion Recruiting site | `--example default` |
-| Career-site discovery | Which Oracle boards does this company run, and how many roles are on each | `--example discover_sites` |
-| Taleo jobs, no login | Read a public Oracle Taleo board without credentials | `--example taleo_jobs` |
-| New postings only | What went live in the last 14 days | `--example new_postings` |
-| Markdown for agents | Descriptions an LLM can actually read, plus employer skill tags | `--example markdown_for_agents` |
+| Recipe | What it answers | Command | Task page |
+|---|---|---|---|
+| Jobs from one board | Every open role on a single Oracle Fusion Recruiting site | `--example default` | [Export Oracle Recruiting Cloud Jobs to CSV or JSON](https://apify.com/johnvc/oracle-taleo-jobs-api/examples/oracle-recruiting-cloud-jobs-export?fpr=9n7kx3) |
+| Career-site discovery | Which Oracle boards does this company run, and how many roles are on each | `--example discover_sites` | [Find Any Company's Oracle Careers Site by Name](https://apify.com/johnvc/oracle-taleo-jobs-api/examples/find-oracle-careers-site-by-company-name?fpr=9n7kx3) |
+| Taleo jobs, no login | Read a public Oracle Taleo board without credentials | `--example taleo_jobs` | [Pull Taleo Job Postings via API, No Login Needed](https://apify.com/johnvc/oracle-taleo-jobs-api/examples/taleo-job-postings-api-no-login?fpr=9n7kx3) |
+| New postings only | What went live in the last 14 days | `--example new_postings` | [Monitor New Oracle and Taleo Job Postings Daily](https://apify.com/johnvc/oracle-taleo-jobs-api/examples/monitor-oracle-taleo-job-postings-daily?fpr=9n7kx3) |
+| Markdown for agents | Descriptions an LLM can actually read, plus employer skill tags | `--example markdown_for_agents` | [Oracle HCM Job Data for Claude and ChatGPT via MCP](https://apify.com/johnvc/oracle-taleo-jobs-api/examples/oracle-hcm-job-data-mcp-server?fpr=9n7kx3) |
+
+Two more task pages have no local helper yet: [Backfill a Job Board with Oracle and Taleo Listings](https://apify.com/johnvc/oracle-taleo-jobs-api/examples/oracle-taleo-job-board-feed-api?fpr=9n7kx3), which reads several boards in one run, and [Map Which Companies Run Oracle Recruiting or Taleo](https://apify.com/johnvc/oracle-taleo-jobs-api/examples/companies-using-oracle-recruiting-and-taleo?fpr=9n7kx3), which returns the directory instead of the jobs. Another ten each cover a single employer's Taleo board, and two cover the API in Chinese. All of them are on the [Examples tab](https://apify.com/johnvc/oracle-taleo-jobs-api/examples?fpr=9n7kx3).
 
 Tip: save any of these inputs as a task in the Apify Console and put it on a Schedule, daily or weekly, so the feed stays fresh without a manual run. Pair the schedule with a diff on `requisitionId` and you have a hiring monitor for any Oracle employer.
 
@@ -111,7 +113,7 @@ Directory only, no jobs:
 
 ```json
 {
-  "companies": ["Oracle", "JPMorgan Chase"],
+  "companies": ["Oracle", "Chase"],
   "discoverOnly": true,
   "includeInactive": false,
   "maxSites": 10
